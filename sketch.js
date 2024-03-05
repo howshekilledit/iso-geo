@@ -1,10 +1,14 @@
 function setup() {
   createCanvas(400, 400);
+  angleMode(DEGREES);
 }
 
 function draw() {
   background(220);
-  drawPolarRombus(60, 100);
+  drawPolarRombus(30, 100);
+  // draw axis lines
+  line(width/2, 0, width/2, height);
+  line(0, height/2, width, height/2);
 }
 
 function drawPolarRombus(a, d, origin = createVector(width/2, height/2)){
