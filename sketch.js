@@ -8,11 +8,13 @@ function setup() {
 
 function draw() {
   background(255);
+  stroke(0);
   isoGrid();
-
-  let p = new Prism(50, 100, 50);
-  p.draw();
-  r = rhombus(30, 50);
+  stroke('red');
+  //drawShape(isoUnit(30, 50, 2));
+  // let p = new Prism(50, 100, 50);
+  // p.draw();
+  // r = rhombus(30, 50);
   //drawShape(r);
   // for (let i = 0; i < 10; i++){
   //   let p = new Prism(100, 100, 100, ogn = createVector(100 + i*200, 100 + i*200));
@@ -36,19 +38,19 @@ class Prism{
   }
   draw(){
     drawShape(this.top);
-    drawShape(this.left);
-    drawShape(this.right);
+    //drawShape(this.left);
+    //drawShape(this.right);
     
   }
 }
 
 function isoGrid(){
   // draw a grid of isometric lines
-  iso = isoUnit(30, 100);
+  iso = isoUnit(30, 50);
   unit = dimensions(iso);
   for (let i = 0; i < width; i+=unit.x){
     for (let j = 0; j < height; j+=unit.y){
-      iso = isoUnit(30, 100, createVector(i, j));
+      iso = isoUnit(30, 50, createVector(i, j));
       drawShape(iso);
     }
   }
@@ -86,17 +88,16 @@ function rhombus(angle, hyp, ogn = createVector(width/2, height/2)){
   return [p1, p2, p3, p4];
 }
 
-function isoUnit(a, d, ogn = createVector(width/2, height/2)){
+function isoUnit(a, d, prop = 1, ogn = createVector(width/2, height/2)){
   // draw a line that is a degrees from origin
   // and d units long
-
   let abs_x = cos(a) * d;
   let abs_y = sin(a) * d;
   pts = [
     createVector(0, abs_y), 
     createVector(abs_x, 0),
     createVector(0, -abs_y),
-    createVector(-abs_x, 0)
+    createVector(-abs_x * prop, 0)
   ]
   for (let p of pts){
     p.add(ogn);
