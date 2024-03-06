@@ -2,13 +2,13 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
 
-  noFill();
+  //noFill();
   noLoop(); 
 }
 
 function draw() {
   background(255);
-  
+  isoGrid();
 
   let p = new Prism(50, 100, 50);
   p.draw();
@@ -32,7 +32,7 @@ class Prism{
     this.top = rhombus(30, l, ogn);
     this.bottom = rhombus(30, l, ogn.add(createVector(0, h)));
     this.left = [this.top[0].copy(), this.bottom[0].copy(), this.bottom[3].copy(), this.top[3].copy()];
-    this.right = [this.top[0].copy(), this.bottom[0].copy(), this.bottom[1].copy(), this.top[1].copy()];
+    this.right = [this.top[2].copy(), this.bottom[2].copy(), this.bottom[3].copy(), this.top[3].copy()];
   }
   draw(){
     drawShape(this.top);
@@ -40,7 +40,21 @@ class Prism{
     drawShape(this.right);
     
   }
+}
 
+function isoGrid(){
+  // draw a grid of isometric lines
+  for (let i = 0; i < width; i+=50){
+    for (let j = 0; j < height; j+=50){
+      drawShape(isoUnit(30, 100, createVector(i, j)));
+    }
+  }
+}
+
+function labelShape(pts){
+  for (let i = 0; i < pts.length; i++){
+    text(i, pts[i].x, pts[i].y);
+  }
 }
 
 function drawShape(pts){
