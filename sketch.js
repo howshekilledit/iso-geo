@@ -94,7 +94,7 @@ function isoUnit(a, d, ogn = createVector(width/2, height/2)){
   let abs_x = cos(a) * d;
   let abs_y = sin(a) * d;
   pts = [
-    createVector(0, abs_y*2), 
+    createVector(0, abs_y), 
     createVector(abs_x*2, 0),
     createVector(0, -abs_y ),
     createVector(-abs_x , 0)
