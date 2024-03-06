@@ -44,9 +44,12 @@ class Prism{
 
 function isoGrid(){
   // draw a grid of isometric lines
-  for (let i = 0; i < width; i+=50){
-    for (let j = 0; j < height; j+=50){
-      drawShape(isoUnit(30, 100, createVector(i, j)));
+  iso = isoUnit(30, 100);
+  unit = dimensions(iso);
+  for (let i = 0; i < width; i+=unit.x){
+    for (let j = 0; j < height; j+=unit.y){
+      iso = isoUnit(30, 100, createVector(i, j));
+      drawShape(iso);
     }
   }
 }
@@ -100,5 +103,16 @@ function isoUnit(a, d, ogn = createVector(width/2, height/2)){
   } 
   return pts; 
 
+}
+
+function dimensions(shape){
+  // get the dimensions of a shape
+  let x = [];
+  let y = [];
+  for (let p of shape){
+    x.push(p.x);
+    y.push(p.y);
+  }
+  return createVector(abs(max(x) - min(x)), abs(max(y) - min(y)));
 }
 
